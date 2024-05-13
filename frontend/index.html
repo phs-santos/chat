@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
 <body>
@@ -22,9 +28,25 @@
         </section>
 
         <section class="chat">
-            <section class="chat__messages">
+            <div class="chat__header">
+                <button class="chat__header__button header__logout">
+                    <span class="material-symbols-outlined">
+                        logout
+                    </span>
+                </button>
 
-            </section>
+                <h2>Chat Online</h2>
+
+                <button class="chat__header__button header__other__users">
+                    <span class="material-symbols-outlined">
+                        group
+                    </span>
+                </button>
+            </div>
+
+            <section class="chat__messages"></section>
+
+            <div class="logged__user"></div>
 
             <form class="chat__form">
                 <input type="text" class="chat__input" placeholder="Digite uma mensagem" required>
