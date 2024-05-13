@@ -14,7 +14,6 @@ const logged = document.querySelector('.logged__user');
 
 // header elements
 const headerLogout = document.querySelector('.header__logout');
-const headerOtherUsers = document.querySelector('.header__other__users');
 
 let user = {
     id: "",
@@ -166,8 +165,8 @@ const handleLogin = (e) => {
     login.style.display = 'none';
     chat.style.display = 'flex';
 
-    websocket = new WebSocket(`ws://localhost:8080`);
-    // websocket = new WebSocket(`wss://chat-backend-ypyl.onrender.com`);
+    // websocket = new WebSocket(`ws://localhost:8080`);
+    websocket = new WebSocket(`wss://chat-backend-ypyl.onrender.com`);
 
     websocket.onopen = () => {
         websocket.send(JSON.stringify({
@@ -205,10 +204,6 @@ const sendMessage = (e) => {
     chatInput.value = '';
 }
 
-const getUsers = () => {
-    websocket.send(JSON.stringify({ type: 'users' }));
-}
-
 const sendClose = () => {
     websocket.send(JSON.stringify({
         type: 'logout',
@@ -222,4 +217,3 @@ const sendClose = () => {
 loginForm.addEventListener('submit', handleLogin)
 headerLogout.addEventListener('click', handleLogout)
 chatForm.addEventListener('submit', sendMessage)
-headerOtherUsers.addEventListener('click', getUsers)
