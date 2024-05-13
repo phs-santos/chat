@@ -24,6 +24,16 @@ wss.on('connection', ws => {
             });
         }
 
+        if(type === 'users') { 
+            const data = {
+                type: 'users',
+                users
+            
+            }
+            ws.send(JSON.stringify(data));
+            return;
+        }
+
         const data = {
             type, userId, userName, userColor, content
         };

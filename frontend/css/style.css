@@ -191,3 +191,18 @@ body {
     align-items: center;
     gap: 10px;
 }
+
+.online__users {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    background-color: #121212;
+    width: 50%;
+    height: 50%;
+
+    position: fixed;
+    top: 10vh;
+    right: 0;
+}

@@ -25,7 +25,9 @@ let user = {
 let websocket
 
 const processMessage = ({ data }) => {
-    const { userId, userName, userColor, content, type } = JSON.parse(data);
+    const { userId, userName, userColor, content, type, users } = JSON.parse(data);
+
+    console.log(data)
 
     if (type === 'login') {
         if (userId === user.id) {
@@ -42,10 +44,12 @@ const processMessage = ({ data }) => {
         return;
     }
 
+    if (type === 'users') {
+        console.log(users)
+        return;
+    }
+
     const message = userId === user.id ? createMessageSelfElement(content) : createMessageOtherElement(content, userName, userColor);
-
-    console.log(message)
-
     chatMessages.appendChild(message);
 
     scrollScreen();
@@ -86,8 +90,8 @@ if (userStorage) {
     login.style.display = 'none';
     chat.style.display = 'flex';
 
-    // websocket = new WebSocket(`ws://localhost:8080`);
-    websocket = new WebSocket(`wss://chat-backend-ypyl.onrender.com`);
+    websocket = new WebSocket(`ws://localhost:8080`);
+    // websocket = new WebSocket(`wss://chat-backend-ypyl.onrender.com`);
     websocket.onmessage = processMessage
 }
 
@@ -162,7 +166,8 @@ const handleLogin = (e) => {
     login.style.display = 'none';
     chat.style.display = 'flex';
 
-    websocket = new WebSocket(`wss://chat-backend-ypyl.onrender.com`);
+    websocket = new WebSocket(`ws://localhost:8080`);
+    // websocket = new WebSocket(`wss://chat-backend-ypyl.onrender.com`);
 
     websocket.onopen = () => {
         websocket.send(JSON.stringify({
@@ -200,6 +205,10 @@ const sendMessage = (e) => {
     chatInput.value = '';
 }
 
+const getUsers = () => {
+    websocket.send(JSON.stringify({ type: 'users' }));
+}
+
 const sendClose = () => {
     websocket.send(JSON.stringify({
         type: 'logout',
@@ -213,3 +222,4 @@ const sendClose = () => {
 loginForm.addEventListener('submit', handleLogin)
 headerLogout.addEventListener('click', handleLogout)
 chatForm.addEventListener('submit', sendMessage)
+headerOtherUsers.addEventListener('click', getUsers)
